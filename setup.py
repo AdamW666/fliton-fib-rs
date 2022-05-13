@@ -7,7 +7,7 @@ dist.Distribution().fetch_build_eggs(['setuptools_rust'])
 
 setup(
     name="fliton-fib-rs",
-    version="0.1"
+    version="0.1",
     rust_extensions=[
         RustExtension(".fliton_fib_rs.fliton_fib_rs",
                       path="Cargo.toml",
