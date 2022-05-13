@@ -19,14 +19,3 @@ fn fliton_fib_rs(_py: Python, m: &PyModule) -> PyResult<()> {
 
     Ok(())
 }
-
-#[cfg(test)]
-mod tests {
-    use pyo3::prelude::{pyfunction, pymodule};
-
-    #[test]
-    fn it_works() {
-        let result = 2 + 2;
-        assert_eq!(result, 4);
-    }
-}
