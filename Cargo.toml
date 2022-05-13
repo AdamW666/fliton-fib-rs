@@ -1,0 +1,16 @@
+[package]
+edition = "2021"
+name = "fliton-fib-rs"
+version = "0.1.0"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+[dependencies.pyo3]
+features = ["extension-module"]
+version = "0.13"
+
+[lib]
+crate-type = ["rlib", "cdylib"]
+name = "flitton_fib_rs"
