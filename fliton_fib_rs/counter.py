@@ -5,7 +5,7 @@ class Counter(metaclass=Singleton):
     def __init__(self, initial_val=0) -> None:
         self._value: int = initial_val
 
-    def increse_count(self) -> None:
+    def increase_count(self) -> None:
         self._value += 1
 
     @property
