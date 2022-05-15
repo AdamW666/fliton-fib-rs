@@ -13,6 +13,9 @@ setup(
                       path="Cargo.toml",
                       binding=Binding.PyO3)
     ],
+    requirements=[
+        "pyyaml>=3.1.3"
+    ],
     packages=["fliton_fib_rs"],
     classifiers=[
         "License :: OSI Approved :: MIT License",
@@ -27,6 +30,9 @@ setup(
     entry_points={
         'console_scripts': [
             'fib-number=fliton_fib_rs.fib_number_command:fib_number_command',
+            'config-fib=fliton_fib_rs.'
+            'config_number_command:'
+            'config_number_command',
         ]
     }
 )
