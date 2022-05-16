@@ -1,6 +1,6 @@
 use crate::fib_calcs::fib_number::fibonacci_number;
 use crate::fib_calcs::fib_numbers::fibonacci_numbers;
-use pyo3::prelude::{pyclass, pyfunction, pymethods};
+use pyo3::prelude::{pyclass, pymethods};
 
 #[pyclass]
 pub struct FibProcessor {
@@ -19,7 +19,8 @@ pub struct FibProcessor {
 
 #[pymethods]
 impl FibProcessor {
-    pub fn process_numbers(input_numbers: Vec<Vec<i32>>) -> Vec<Vec<u64>> {
+    #[staticmethod]
+    fn process_numbers(input_numbers: Vec<Vec<i32>>) -> Vec<Vec<u64>> {
         let mut buffer: Vec<Vec<u64>> = Vec::new();
 
         for i in input_numbers {
