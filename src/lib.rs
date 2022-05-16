@@ -1,3 +1,4 @@
+use pyo3::buffer;
 use pyo3::prelude::*;
 use pyo3::wrap_pyfunction;
 
@@ -19,6 +20,21 @@ fn say_hello() {
     println!("Say hello from Rust");
 }
 
+#[pyfunction]
+fn time_add_vectors(total_vector_size: i32) -> Vec<i32> {
+    let mut buffer: Vec<i32> = Vec::new();
+
+    let first_vector: Vec<i32> = (0..total_vector_size.clone()).map(|x| x).collect();
+
+    let second_vector: Vec<i32> = (0..total_vector_size).map(|x| x).collect();
+
+    for i in &first_vector {
+        buffer.push(first_vector[*i as usize] + second_vector[*i as usize]);
+    }
+
+    return buffer;
+}
+
 #[pymodule]
 fn fliton_fib_rs(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_wrapped(wrap_pyfunction!(say_hello)).unwrap();
@@ -27,6 +43,8 @@ fn fliton_fib_rs(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_wrapped(wrap_pyfunction!(run_config)).unwrap();
     m.add_wrapped(wrap_pyfunction!(object_interface)).unwrap();
     m.add_class::<FibProcessor>()?;
+
+    m.add_wrapped(wrap_pyfunction!(time_add_vectors))?;
 
     Ok(())
 }
