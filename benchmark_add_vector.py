@@ -1,7 +1,7 @@
-import time
-import matplotlib.pyplot as plt
-import numpy as np
 from fliton_fib_rs import time_add_vectors
+import numpy as np
+import matplotlib.pyplot as plt
+import time
 
 
 def rust_function(total_vector_size: int) -> float:
@@ -44,11 +44,12 @@ def python_function(total_vector_size: int) -> float:
     return result
 
 
-numpy_results = [numpy_function(i) for i in range(0, 300)]
-rust_results = [rust_function(i) for i in range(0, 300)]
-python_results = [python_function(i) for i in range(0, 300)]
+numpy_results = [numpy_function(i) for i in range(0, 200)]
+rust_results = [rust_function(i) for i in range(0, 200)]
+python_results = [python_function(i) for i in range(0, 200)]
 
 plt.plot(rust_results, linestyle='solid', color="green")
 plt.plot(python_results, linestyle='solid', color="red")
 plt.plot(numpy_results, linestyle='solid', color="blue")
-plt.show()
+# plt.show()
+plt.savefig("benchmark_add_vector.png")
