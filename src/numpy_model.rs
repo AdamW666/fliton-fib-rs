@@ -28,8 +28,7 @@ fn get_times<'a>(py: &'a Python, locals: &PyDict) -> &'a PyAny {
 }
 
 fn get_parameters<'a>(py: &'a Python, locals: &PyDict) -> &'a PyAny {
-    let code: &str = "
-    np.dot(inverted_weights_matrix, input_vector)";
+    let code: &str = "np.dot(inverted_weights_matrix, input_vector)";
     let parameters = py.eval(code, None, Some(&locals)).unwrap();
     return parameters;
 }
