@@ -1,5 +1,5 @@
-use pyo3::buffer;
 use pyo3::prelude::*;
+use pyo3::types::PyDict;
 use pyo3::wrap_pyfunction;
 
 mod class_module;
@@ -35,6 +35,29 @@ fn time_add_vectors(total_vector_size: i32) -> Vec<i32> {
     return buffer;
 }
 
+#[pyfunction]
+fn test_numpy<'a>(result_dict: &'a PyDict) -> PyResult<&'a PyDict> {
+    let gil = Python::acquire_gil();
+    let py = gil.python();
+
+    let locals = PyDict::new(py);
+    locals.set_item("np", py.import("numpy")?);
+
+    let code = "np.array([[3,2], [1,4]])";
+    let weights_matrix = py.eval(code, None, Some(&locals))?;
+    locals.set_item("weight_matrix", weights_matrix);
+
+    let code_1 = "np.array([[10],[20]])";
+    let input_matrix = py.eval(code_1, None, Some(&locals)).unwrap();
+    locals.set_item("input_matrix", input_matrix);
+
+    let calc_code = "np.dot(weights_matrix,input_matrix)";
+    let result_end = py.eval(calc_code, None, Some(&locals))?;
+    result_dict.set_item("numpy result", result_end);
+
+    return Ok(result_dict);
+}
+
 #[pymodule]
 fn fliton_fib_rs(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_wrapped(wrap_pyfunction!(say_hello)).unwrap();
@@ -45,6 +68,7 @@ fn fliton_fib_rs(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_class::<FibProcessor>()?;
 
     m.add_wrapped(wrap_pyfunction!(time_add_vectors))?;
+    m.add_wrapped(wrap_pyfunction!(test_numpy))?;
 
     Ok(())
 }
