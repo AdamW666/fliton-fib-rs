@@ -41,19 +41,19 @@ fn test_numpy<'a>(result_dict: &'a PyDict) -> PyResult<&'a PyDict> {
     let py = gil.python();
 
     let locals = PyDict::new(py);
-    locals.set_item("np", py.import("numpy")?);
+    locals.set_item("np", py.import("numpy")?)?;
 
     let code = "np.array([[3,2], [1,4]])";
     let weights_matrix = py.eval(code, None, Some(&locals))?;
-    locals.set_item("weight_matrix", weights_matrix);
+    locals.set_item("weights_matrix", weights_matrix)?;
 
     let code_1 = "np.array([[10],[20]])";
     let input_matrix = py.eval(code_1, None, Some(&locals)).unwrap();
-    locals.set_item("input_matrix", input_matrix);
+    locals.set_item("input_matrix", input_matrix)?;
 
     let calc_code = "np.dot(weights_matrix,input_matrix)";
     let result_end = py.eval(calc_code, None, Some(&locals))?;
-    result_dict.set_item("numpy result", result_end);
+    result_dict.set_item("numpy result", result_end)?;
 
     return Ok(result_dict);
 }

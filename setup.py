@@ -14,7 +14,8 @@ setup(
                       binding=Binding.PyO3)
     ],
     requirements=[
-        "pyyaml>=3.1.3"
+        "pyyaml>=3.1.3",
+        "numpy>=1.21"
     ],
     packages=["fliton_fib_rs"],
     classifiers=[
