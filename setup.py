@@ -15,7 +15,7 @@ setup(
     ],
     requirements=[
         "pyyaml>=3.1.3",
-        "numpy>=1.21"
+        "numpy"
     ],
     packages=["fliton_fib_rs"],
     classifiers=[
